@@ -1,0 +1,767 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="GreameRAT" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="GreameRAT_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Core.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="GreameRAT" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence DisplayName="PHF 1" sap2010:WorkflowViewState.IdRef="Sequence_19">
+      <Sequence DisplayName="Warm up" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Update the address map" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_1" ScriptPath="c:\tools\uipath_projects\Greame RAT v1.9\update_pid.ps1" />
+        <ui:StartProcess Arguments="-f" ContinueOnError="True" DisplayName="Start the collector" FileName="c:\tools\apps\apt_collector_release-master\ETWDataCollectorRedesigned.exe" sap2010:WorkflowViewState.IdRef="StartProcess_1" WorkingDirectory="c:\tools\apps\apt_collector_release-master" />
+        <Delay DisplayName="Delay 15 s" Duration="00:00:15" sap2010:WorkflowViewState.IdRef="Delay_1" />
+        <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start the RAT" FileName="c:\tools\rats\Greame RAT v1.9\GreameRAT.exe" sap2010:WorkflowViewState.IdRef="StartProcess_2" />
+        <Delay DisplayName="Delay 5 s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_5" />
+      </Sequence>
+      <Sequence DisplayName="Remote Desktop Sequence" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" DisplayName="Set focus 'GreameRAT.exe Greame'" sap2010:WorkflowViewState.IdRef="SetFocus_1">
+          <ui:SetFocus.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b4bb8db6f401f9deaea025b12b627c4c" Selector="&lt;wnd app='greamerat.exe' cls='TPrincipal' title='Greame RAT &amp;lt;c&amp;gt; 2013 [ Greyme Company ]' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SetFocus.Target>
+        </ui:SetFocus>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'list item  China'" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_RIGHT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="24" OffsetY="12" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="bdd9abe04871c35331b88d6f78335a41" Selector="&lt;wnd app='greamerat.exe' cls='TPrincipal' title='Greame RAT &amp;lt;c&amp;gt; 2013 [ Greyme Company ]' /&gt;&lt;wnd cls='TTabSheet' title='Servers online: 1' /&gt;&lt;wnd cls='TPanel' title='pnl1' /&gt;&lt;wnd cls='TListView' /&gt;&lt;ctrl name='China' role='list item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item'" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="68" OffsetY="10" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="064d0c6fd72dc1ba10b9a04fb318d0b4" Selector="&lt;wnd app='greamerat.exe' cls='#32768' /&gt;&lt;ctrl name='上下文' role='popup menu' /&gt;&lt;ctrl idx='1' role='menu item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item  46'" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="72" OffsetY="10" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="a7705eee4a04de5c566ec1722e8dab54" Selector="&lt;wnd app='greamerat.exe' cls='#32768' idx='1' /&gt;&lt;ctrl automationid='46' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+          <ui:CommentOut.Body>
+            <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_14">
+              <Delay DisplayName="Delay before close" Duration="00:01:00" sap2010:WorkflowViewState.IdRef="Delay_6" />
+            </Sequence>
+          </ui:CommentOut.Body>
+        </ui:CommentOut>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'GreameRAT.exe Server_Fi...'" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="692" OffsetY="13" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b981618e75d1be6cb0e4e1f35ca6dba2" Selector="&lt;wnd app='greamerat.exe' cls='TfrmDesktop' title='Server_Fire_1668A96A,  [ Remote Desktop ]1920 X 1080 ---&amp;gt; 691 X *' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+      </Sequence>
+      <Sequence DisplayName="Wrap up" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Delay DisplayName="Delay 5s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_2" />
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Stop the RAT" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_3" ScriptPath="c:\tools\uipath_projects\Greame RAT v1.9\kill_processes.ps1" />
+        <Delay DisplayName="Delay 15 s" Duration="00:00:15" sap2010:WorkflowViewState.IdRef="Delay_4" />
+        <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Stop the collector" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="c" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+          <ui:SendHotkey.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;wnd app='etwdatacollectorredesigned.exe' cls='ConsoleWindowClass'/&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SendHotkey.Target>
+        </ui:SendHotkey>
+        <ui:MoveFile ContinueOnError="{x:Null}" Destination="c:\tools\output\Greame RAT-v1.9-Remote-Desktop.traces" DisplayName="Save the output" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="False" Path="c:\tools\apps\apt_collector_release-master\output.out" />
+      </Sequence>
+    </Sequence>
+    <Sequence DisplayName="PHF 2" sap2010:WorkflowViewState.IdRef="Sequence_21">
+      <Sequence DisplayName="Warm up" sap2010:WorkflowViewState.IdRef="Sequence_20">
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Update the address map" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_8" ScriptPath="c:\tools\uipath_projects\Greame RAT v1.9\update_pid.ps1" />
+        <ui:StartProcess Arguments="-f" ContinueOnError="True" DisplayName="Start the collector" FileName="c:\tools\apps\apt_collector_release-master\ETWDataCollectorRedesigned.exe" sap2010:WorkflowViewState.IdRef="StartProcess_3" WorkingDirectory="c:\tools\apps\apt_collector_release-master" />
+        <Delay DisplayName="Delay 15 s" Duration="00:00:15" sap2010:WorkflowViewState.IdRef="Delay_19" />
+        <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start the RAT" FileName="c:\tools\rats\Greame RAT v1.9\GreameRAT.exe" sap2010:WorkflowViewState.IdRef="StartProcess_4" />
+        <Delay DisplayName="Delay 5 s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_20" />
+      </Sequence>
+      <Sequence DisplayName="Remote Audio Sequence" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" DisplayName="Set focus 'GreameRAT.exe Greame'" sap2010:WorkflowViewState.IdRef="SetFocus_2">
+          <ui:SetFocus.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b4bb8db6f401f9deaea025b12b627c4c" Selector="&lt;wnd app='greamerat.exe' cls='TPrincipal' title='Greame RAT &amp;lt;c&amp;gt; 2013 [ Greyme Company ]' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SetFocus.Target>
+        </ui:SetFocus>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'list item  China'" sap2010:WorkflowViewState.IdRef="Click_10" KeyModifiers="None" MouseButton="BTN_RIGHT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="24" OffsetY="12" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="bdd9abe04871c35331b88d6f78335a41" Selector="&lt;wnd app='greamerat.exe' cls='TPrincipal' title='Greame RAT &amp;lt;c&amp;gt; 2013 [ Greyme Company ]' /&gt;&lt;wnd cls='TTabSheet' title='Servers online: 1' /&gt;&lt;wnd cls='TPanel' title='pnl1' /&gt;&lt;wnd cls='TListView' /&gt;&lt;ctrl name='China' role='list item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item'" sap2010:WorkflowViewState.IdRef="Click_11" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="68" OffsetY="10" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="064d0c6fd72dc1ba10b9a04fb318d0b4" Selector="&lt;wnd app='greamerat.exe' cls='#32768' /&gt;&lt;ctrl name='上下文' role='popup menu' /&gt;&lt;ctrl idx='1' role='menu item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item  47'" sap2010:WorkflowViewState.IdRef="Click_12" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="71" OffsetY="17" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="514db7ce7aaa7be37ba3f7980905f9c7" Selector="&lt;wnd app='greamerat.exe' cls='#32768' idx='1' /&gt;&lt;ctrl automationid='47' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+          <ui:CommentOut.Body>
+            <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_15">
+              <Delay DisplayName="Delay before close" Duration="00:01:00" sap2010:WorkflowViewState.IdRef="Delay_7" />
+            </Sequence>
+          </ui:CommentOut.Body>
+        </ui:CommentOut>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'GreameRAT.exe Server_Fi...'" sap2010:WorkflowViewState.IdRef="Click_13" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="250" OffsetY="12" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="4f284b13572cbc065d3609915aa3d266" Selector="&lt;wnd app='greamerat.exe' cls='TfrmAudio' title='Server_Fire_1668A96A, [ Audio ]' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+      </Sequence>
+      <Sequence DisplayName="Wrap up" sap2010:WorkflowViewState.IdRef="Sequence_6">
+        <Delay DisplayName="Delay 5s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_8" />
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Stop the RAT" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_4" ScriptPath="c:\tools\uipath_projects\Greame RAT v1.9\kill_processes.ps1" />
+        <Delay DisplayName="Delay 15 s" Duration="00:00:15" sap2010:WorkflowViewState.IdRef="Delay_9" />
+        <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Stop the collector" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="c" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+          <ui:SendHotkey.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;wnd app='etwdatacollectorredesigned.exe' cls='ConsoleWindowClass'/&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SendHotkey.Target>
+        </ui:SendHotkey>
+        <ui:MoveFile ContinueOnError="{x:Null}" Destination="c:\tools\output\Greame RAT-v1.9-Remote-Audio.traces" DisplayName="Save the output" sap2010:WorkflowViewState.IdRef="MoveFile_2" Overwrite="False" Path="c:\tools\apps\apt_collector_release-master\output.out" />
+      </Sequence>
+    </Sequence>
+    <Sequence DisplayName="PHF 3" sap2010:WorkflowViewState.IdRef="Sequence_23">
+      <Sequence DisplayName="Warm up" sap2010:WorkflowViewState.IdRef="Sequence_22">
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Update the address map" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_9" ScriptPath="c:\tools\uipath_projects\Greame RAT v1.9\update_pid.ps1" />
+        <ui:StartProcess Arguments="-f" ContinueOnError="True" DisplayName="Start the collector" FileName="c:\tools\apps\apt_collector_release-master\ETWDataCollectorRedesigned.exe" sap2010:WorkflowViewState.IdRef="StartProcess_5" WorkingDirectory="c:\tools\apps\apt_collector_release-master" />
+        <Delay DisplayName="Delay 15 s" Duration="00:00:15" sap2010:WorkflowViewState.IdRef="Delay_21" />
+        <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start the RAT" FileName="c:\tools\rats\Greame RAT v1.9\GreameRAT.exe" sap2010:WorkflowViewState.IdRef="StartProcess_6" />
+        <Delay DisplayName="Delay 5 s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_22" />
+      </Sequence>
+      <Sequence DisplayName="Remte Keylogger Sequence" sap2010:WorkflowViewState.IdRef="Sequence_7">
+        <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" DisplayName="Set focus 'GreameRAT.exe Greame'" sap2010:WorkflowViewState.IdRef="SetFocus_3">
+          <ui:SetFocus.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b4bb8db6f401f9deaea025b12b627c4c" Selector="&lt;wnd app='greamerat.exe' cls='TPrincipal' title='Greame RAT &amp;lt;c&amp;gt; 2013 [ Greyme Company ]' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SetFocus.Target>
+        </ui:SetFocus>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'list item  China'" sap2010:WorkflowViewState.IdRef="Click_17" KeyModifiers="None" MouseButton="BTN_RIGHT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="24" OffsetY="12" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="bdd9abe04871c35331b88d6f78335a41" Selector="&lt;wnd app='greamerat.exe' cls='TPrincipal' title='Greame RAT &amp;lt;c&amp;gt; 2013 [ Greyme Company ]' /&gt;&lt;wnd cls='TTabSheet' title='Servers online: 1' /&gt;&lt;wnd cls='TPanel' title='pnl1' /&gt;&lt;wnd cls='TListView' /&gt;&lt;ctrl name='China' role='list item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item'" sap2010:WorkflowViewState.IdRef="Click_18" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="68" OffsetY="10" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="064d0c6fd72dc1ba10b9a04fb318d0b4" Selector="&lt;wnd app='greamerat.exe' cls='#32768' /&gt;&lt;ctrl name='上下文' role='popup menu' /&gt;&lt;ctrl idx='1' role='menu item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item  51'" sap2010:WorkflowViewState.IdRef="Click_19" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="56" OffsetY="15" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="69b9db740a672521aab15e8aae309143" Selector="&lt;wnd app='greamerat.exe' cls='#32768' idx='1' /&gt;&lt;ctrl automationid='51' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+          <ui:CommentOut.Body>
+            <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_16">
+              <Delay DisplayName="Delay before close" Duration="00:01:00" sap2010:WorkflowViewState.IdRef="Delay_10" />
+            </Sequence>
+          </ui:CommentOut.Body>
+        </ui:CommentOut>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'GreameRAT.exe Server_Fi...'" sap2010:WorkflowViewState.IdRef="Click_20" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="612" OffsetY="17" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="5b6cbaa792d26934f4830a96a96f7058" Selector="&lt;wnd app='greamerat.exe' cls='TfrmKeylogger' title='Server_Fire_1668A96A, [ Keylogger ]' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+      </Sequence>
+      <Sequence DisplayName="Wrap up" sap2010:WorkflowViewState.IdRef="Sequence_8">
+        <Delay DisplayName="Delay 5s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_11" />
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Stop the RAT" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_5" ScriptPath="c:\tools\uipath_projects\Greame RAT v1.9\kill_processes.ps1" />
+        <Delay DisplayName="Delay 15 s" Duration="00:00:15" sap2010:WorkflowViewState.IdRef="Delay_12" />
+        <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Stop the collector" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_3" Key="c" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+          <ui:SendHotkey.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;wnd app='etwdatacollectorredesigned.exe' cls='ConsoleWindowClass'/&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SendHotkey.Target>
+        </ui:SendHotkey>
+        <ui:MoveFile ContinueOnError="{x:Null}" Destination="c:\tools\output\Greame RAT-v1.9-Remote-Keylogger.traces" DisplayName="Save the output" sap2010:WorkflowViewState.IdRef="MoveFile_3" Overwrite="False" Path="c:\tools\apps\apt_collector_release-master\output.out" />
+      </Sequence>
+    </Sequence>
+    <Sequence DisplayName="PHF 4" sap2010:WorkflowViewState.IdRef="Sequence_25">
+      <Sequence DisplayName="Warm up" sap2010:WorkflowViewState.IdRef="Sequence_24">
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Update the address map" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_10" ScriptPath="c:\tools\uipath_projects\Greame RAT v1.9\update_pid.ps1" />
+        <ui:StartProcess Arguments="-f" ContinueOnError="True" DisplayName="Start the collector" FileName="c:\tools\apps\apt_collector_release-master\ETWDataCollectorRedesigned.exe" sap2010:WorkflowViewState.IdRef="StartProcess_7" WorkingDirectory="c:\tools\apps\apt_collector_release-master" />
+        <Delay DisplayName="Delay 15 s" Duration="00:00:15" sap2010:WorkflowViewState.IdRef="Delay_23" />
+        <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start the RAT" FileName="c:\tools\rats\Greame RAT v1.9\GreameRAT.exe" sap2010:WorkflowViewState.IdRef="StartProcess_8" />
+        <Delay DisplayName="Delay 5 s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_24" />
+      </Sequence>
+      <Sequence DisplayName="Remote Shell Sequence" sap2010:WorkflowViewState.IdRef="Sequence_9">
+        <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" DisplayName="Set focus 'GreameRAT.exe Greame'" sap2010:WorkflowViewState.IdRef="SetFocus_4">
+          <ui:SetFocus.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b4bb8db6f401f9deaea025b12b627c4c" Selector="&lt;wnd app='greamerat.exe' cls='TPrincipal' title='Greame RAT &amp;lt;c&amp;gt; 2013 [ Greyme Company ]' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SetFocus.Target>
+        </ui:SetFocus>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'list item  China'" sap2010:WorkflowViewState.IdRef="Click_23" KeyModifiers="None" MouseButton="BTN_RIGHT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="24" OffsetY="12" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="bdd9abe04871c35331b88d6f78335a41" Selector="&lt;wnd app='greamerat.exe' cls='TPrincipal' title='Greame RAT &amp;lt;c&amp;gt; 2013 [ Greyme Company ]' /&gt;&lt;wnd cls='TTabSheet' title='Servers online: 1' /&gt;&lt;wnd cls='TPanel' title='pnl1' /&gt;&lt;wnd cls='TListView' /&gt;&lt;ctrl name='China' role='list item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item'" sap2010:WorkflowViewState.IdRef="Click_24" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="68" OffsetY="10" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="064d0c6fd72dc1ba10b9a04fb318d0b4" Selector="&lt;wnd app='greamerat.exe' cls='#32768' /&gt;&lt;ctrl name='上下文' role='popup menu' /&gt;&lt;ctrl idx='1' role='menu item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item  52'" sap2010:WorkflowViewState.IdRef="Click_25" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="75" OffsetY="14" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="615e0cd723aa0dd9c901dadfdbb24fde" Selector="&lt;wnd app='greamerat.exe' cls='#32768' idx='1' /&gt;&lt;ctrl automationid='52' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+          <ui:CommentOut.Body>
+            <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_17">
+              <Delay DisplayName="Delay before close" Duration="00:01:00" sap2010:WorkflowViewState.IdRef="Delay_13" />
+            </Sequence>
+          </ui:CommentOut.Body>
+        </ui:CommentOut>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'GreameRAT.exe Server_Fi...'" sap2010:WorkflowViewState.IdRef="Click_26" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="522" OffsetY="14" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="25bc924196f76f9b5eb9371ce9124789" Selector="&lt;wnd app='greamerat.exe' cls='TfrmShell' title='Server_Fire_1668A96A, [ DOS Prompt ]' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+      </Sequence>
+      <Sequence DisplayName="Wrap up" sap2010:WorkflowViewState.IdRef="Sequence_10">
+        <Delay DisplayName="Delay 5s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_14" />
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Stop the RAT" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_6" ScriptPath="c:\tools\uipath_projects\Greame RAT v1.9\kill_processes.ps1" />
+        <Delay DisplayName="Delay 15 s" Duration="00:00:15" sap2010:WorkflowViewState.IdRef="Delay_15" />
+        <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Stop the collector" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_4" Key="c" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+          <ui:SendHotkey.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;wnd app='etwdatacollectorredesigned.exe' cls='ConsoleWindowClass'/&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SendHotkey.Target>
+        </ui:SendHotkey>
+        <ui:MoveFile ContinueOnError="{x:Null}" Destination="c:\tools\output\Greame RAT-v1.9-Remote-Shell-.traces" DisplayName="Save the output" sap2010:WorkflowViewState.IdRef="MoveFile_4" Overwrite="False" Path="c:\tools\apps\apt_collector_release-master\output.out" />
+      </Sequence>
+    </Sequence>
+    <Sequence DisplayName="PHF 5" sap2010:WorkflowViewState.IdRef="Sequence_27">
+      <Sequence DisplayName="Warm up" sap2010:WorkflowViewState.IdRef="Sequence_26">
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Update the address map" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_11" ScriptPath="c:\tools\uipath_projects\Greame RAT v1.9\update_pid.ps1" />
+        <ui:StartProcess Arguments="-f" ContinueOnError="True" DisplayName="Start the collector" FileName="c:\tools\apps\apt_collector_release-master\ETWDataCollectorRedesigned.exe" sap2010:WorkflowViewState.IdRef="StartProcess_9" WorkingDirectory="c:\tools\apps\apt_collector_release-master" />
+        <Delay DisplayName="Delay 15 s" Duration="00:00:15" sap2010:WorkflowViewState.IdRef="Delay_25" />
+        <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start the RAT" FileName="c:\tools\rats\Greame RAT v1.9\GreameRAT.exe" sap2010:WorkflowViewState.IdRef="StartProcess_10" />
+        <Delay DisplayName="Delay 5 s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_26" />
+      </Sequence>
+      <Sequence DisplayName="Download &amp; Execution Sequence" sap2010:WorkflowViewState.IdRef="Sequence_11">
+        <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" DisplayName="Set focus 'GreameRAT.exe Greame'" sap2010:WorkflowViewState.IdRef="SetFocus_5">
+          <ui:SetFocus.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b4bb8db6f401f9deaea025b12b627c4c" Selector="&lt;wnd app='greamerat.exe' cls='TPrincipal' title='Greame RAT &amp;lt;c&amp;gt; 2013 [ Greyme Company ]' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SetFocus.Target>
+        </ui:SetFocus>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'list item  China'" sap2010:WorkflowViewState.IdRef="Click_28" KeyModifiers="None" MouseButton="BTN_RIGHT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="24" OffsetY="12" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="bdd9abe04871c35331b88d6f78335a41" Selector="&lt;wnd app='greamerat.exe' cls='TPrincipal' title='Greame RAT &amp;lt;c&amp;gt; 2013 [ Greyme Company ]' /&gt;&lt;wnd cls='TTabSheet' title='Servers online: 1' /&gt;&lt;wnd cls='TPanel' title='pnl1' /&gt;&lt;wnd cls='TListView' /&gt;&lt;ctrl name='China' role='list item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item'" sap2010:WorkflowViewState.IdRef="Click_33" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="67" OffsetY="9" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="c8d9bf3897e37dffe6406ad92a8c9874" Selector="&lt;wnd app='greamerat.exe' cls='#32768' /&gt;&lt;ctrl name='上下文' role='popup menu' /&gt;&lt;ctrl idx='2' role='menu item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item  63'" sap2010:WorkflowViewState.IdRef="Click_30" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="80" OffsetY="12" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="5730ccc0ffa10c6369127b04f17279f5" Selector="&lt;wnd app='greamerat.exe' cls='#32768' idx='1' /&gt;&lt;ctrl automationid='63' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_5">
+          <ui:CommentOut.Body>
+            <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_18">
+              <Delay DisplayName="Delay before close" Duration="00:01:00" sap2010:WorkflowViewState.IdRef="Delay_16" />
+            </Sequence>
+          </ui:CommentOut.Body>
+        </ui:CommentOut>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'GreameRAT.exe'" sap2010:WorkflowViewState.IdRef="Click_31" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="220" OffsetY="7" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="472076da57647c333258cfa0c235c267" Selector="&lt;wnd app='greamerat.exe' cls='TForm' title='Download and execute file' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+      </Sequence>
+      <Sequence DisplayName="Wrap up" sap2010:WorkflowViewState.IdRef="Sequence_12">
+        <Delay DisplayName="Delay 5s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_17" />
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Stop the RAT" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_7" ScriptPath="c:\tools\uipath_projects\Greame RAT v1.9\kill_processes.ps1" />
+        <Delay DisplayName="Delay 15 s" Duration="00:00:15" sap2010:WorkflowViewState.IdRef="Delay_18" />
+        <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Stop the collector" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_5" Key="c" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+          <ui:SendHotkey.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;wnd app='etwdatacollectorredesigned.exe' cls='ConsoleWindowClass'/&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SendHotkey.Target>
+        </ui:SendHotkey>
+        <ui:MoveFile ContinueOnError="{x:Null}" Destination="c:\tools\output\Greame RAT v1.9phf_name.traces" DisplayName="Save the output" sap2010:WorkflowViewState.IdRef="MoveFile_5" Overwrite="False" Path="c:\tools\apps\apt_collector_release-master\output.out" />
+      </Sequence>
+    </Sequence>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_1" sap:VirtualizedContainerService.HintSize="314,61" />
+      <sap2010:ViewStateData Id="StartProcess_1" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Delay_1" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="StartProcess_2" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_5" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336,563">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetFocus_1" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Click_1" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Click_2" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Click_3" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Delay_6" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="222,146">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_1" sap:VirtualizedContainerService.HintSize="416,224" />
+      <sap2010:ViewStateData Id="Click_4" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="336,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_2" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_3" sap:VirtualizedContainerService.HintSize="314,61" />
+      <sap2010:ViewStateData Id="Delay_4" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="SendHotkey_1" sap:VirtualizedContainerService.HintSize="314,118">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MoveFile_1" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="336,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_19" sap:VirtualizedContainerService.HintSize="358,873">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_8" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="StartProcess_3" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Delay_19" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="StartProcess_4" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_20" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_20" sap:VirtualizedContainerService.HintSize="200,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetFocus_2" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Click_10" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Click_11" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Click_12" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Delay_7" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="222,146">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_2" sap:VirtualizedContainerService.HintSize="416,224" />
+      <sap2010:ViewStateData Id="Click_13" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="200,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_8" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_4" sap:VirtualizedContainerService.HintSize="314,61" />
+      <sap2010:ViewStateData Id="Delay_9" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="SendHotkey_2" sap:VirtualizedContainerService.HintSize="314,118">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MoveFile_2" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="200,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_21" sap:VirtualizedContainerService.HintSize="358,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_9" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="StartProcess_5" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Delay_21" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="StartProcess_6" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_22" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_22" sap:VirtualizedContainerService.HintSize="200,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetFocus_3" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Click_17" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Click_18" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Click_19" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Delay_10" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_16" sap:VirtualizedContainerService.HintSize="222,146">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_3" sap:VirtualizedContainerService.HintSize="416,224" />
+      <sap2010:ViewStateData Id="Click_20" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="200,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_11" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_5" sap:VirtualizedContainerService.HintSize="314,61" />
+      <sap2010:ViewStateData Id="Delay_12" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="SendHotkey_3" sap:VirtualizedContainerService.HintSize="314,118">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MoveFile_3" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="200,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_23" sap:VirtualizedContainerService.HintSize="358,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_10" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="StartProcess_7" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Delay_23" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="StartProcess_8" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_24" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_24" sap:VirtualizedContainerService.HintSize="200,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetFocus_4" sap:VirtualizedContainerService.HintSize="416,106">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Click_23" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Click_24" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Click_25" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Delay_13" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_17" sap:VirtualizedContainerService.HintSize="222,146">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_4" sap:VirtualizedContainerService.HintSize="416,224" />
+      <sap2010:ViewStateData Id="Click_26" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="200,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_14" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_6" sap:VirtualizedContainerService.HintSize="314,61" />
+      <sap2010:ViewStateData Id="Delay_15" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="SendHotkey_4" sap:VirtualizedContainerService.HintSize="314,118">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MoveFile_4" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="200,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_25" sap:VirtualizedContainerService.HintSize="358,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_11" sap:VirtualizedContainerService.HintSize="314,61" />
+      <sap2010:ViewStateData Id="StartProcess_9" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Delay_25" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="StartProcess_10" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_26" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_26" sap:VirtualizedContainerService.HintSize="438,563">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetFocus_5" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Click_28" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Click_33" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Click_30" sap:VirtualizedContainerService.HintSize="416,106" />
+      <sap2010:ViewStateData Id="Delay_16" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_18" sap:VirtualizedContainerService.HintSize="222,146">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_5" sap:VirtualizedContainerService.HintSize="416,224" />
+      <sap2010:ViewStateData Id="Click_31" sap:VirtualizedContainerService.HintSize="416,106">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="438,1078">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_17" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_7" sap:VirtualizedContainerService.HintSize="314,61" />
+      <sap2010:ViewStateData Id="Delay_18" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="SendHotkey_5" sap:VirtualizedContainerService.HintSize="314,118">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MoveFile_5" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="438,529">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_27" sap:VirtualizedContainerService.HintSize="358,53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="380,1369">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GreameRAT_1" sap:VirtualizedContainerService.HintSize="420,1449" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

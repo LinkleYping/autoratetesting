@@ -1,0 +1,14 @@
+{
+  "name": "Greame RAT v1.9",
+  "description": "Project",
+  "main": "GreameRAT.xaml",
+  "dependencies": {},
+  "excludedData": [
+    "Private:*",
+    "*password*"
+  ],
+  "toolVersion": "18.2",
+  "projectVersion": "1.0.6765.28957",
+  "packOptions": {},
+  "runtimeOptions": {}
+}

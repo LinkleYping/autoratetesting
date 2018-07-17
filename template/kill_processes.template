@@ -1,0 +1,2 @@
+taskkill /im server.exe /f
+taskkill /im "{{ RAT_NAME }}" /f
