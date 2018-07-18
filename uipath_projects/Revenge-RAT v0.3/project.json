@@ -1,0 +1,14 @@
+{
+  "name": "Revenge-RAT v0.3",
+  "description": "Project",
+  "main": "Revenge.xaml",
+  "dependencies": {},
+  "excludedData": [
+    "Private:*",
+    "*password*"
+  ],
+  "toolVersion": "18.2",
+  "projectVersion": "1.0.6773.16130",
+  "packOptions": {},
+  "runtimeOptions": {}
+}

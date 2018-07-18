@@ -1,0 +1,154 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Mega" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="Mega_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Core.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Mega" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence DisplayName="Keylogger Sequence" sap2010:WorkflowViewState.IdRef="Sequence_5">
+      <Sequence DisplayName="Warm up" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Update the address map" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_1" ScriptPath="c:\tools\uipath_projects\Mega RAT 1.5 Beta\update_pid.ps1" />
+        <Delay DisplayName="Delay 5 s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_7" />
+        <ui:StartProcess Arguments="-f" ContinueOnError="True" DisplayName="Start the collector" FileName="c:\tools\apps\apt_collector_release-master\ETWDataCollectorRedesigned.exe" sap2010:WorkflowViewState.IdRef="StartProcess_1" WorkingDirectory="c:\tools\apps\apt_collector_release-master" />
+        <Delay DisplayName="Delay 20 s" Duration="00:00:20" sap2010:WorkflowViewState.IdRef="Delay_1" />
+        <ui:StartProcess Arguments="{x:Null}" DisplayName="Start the RAT" FileName="Mega.exe" sap2010:WorkflowViewState.IdRef="StartProcess_2" WorkingDirectory="c:\tools\rats\Mega RAT 1.5 Beta" />
+        <Delay DisplayName="Delay 5 s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_5" />
+      </Sequence>
+      <Sequence DisplayName="Keylogger 1" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <Delay DisplayName="Delay before close" Duration="00:01:00" sap2010:WorkflowViewState.IdRef="Delay_6" />
+      </Sequence>
+      <Sequence DisplayName="Wrap up" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Delay DisplayName="Delay 5s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_2" />
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Stop the RAT" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_3" ScriptPath="c:\tools\uipath_projects\Mega RAT 1.5 Beta\kill_processes.ps1" />
+        <Delay DisplayName="Delay 20 s" Duration="00:00:20" sap2010:WorkflowViewState.IdRef="Delay_8" />
+        <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Stop the collector" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="c" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+          <ui:SendHotkey.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;wnd app='etwdatacollectorredesigned.exe' cls='ConsoleWindowClass'/&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SendHotkey.Target>
+        </ui:SendHotkey>
+        <ui:MoveFile ContinueOnError="{x:Null}" Destination="c:\tools\output\Mega-1.5Beta-Keylogger.traces" DisplayName="Save the output" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="True" Path="c:\tools\apps\apt_collector_release-master\output.out" />
+      </Sequence>
+    </Sequence>
+    <sads:DebugSymbol.Symbol>dzRDOlx0b29sc1x1aXBhdGhfcHJvamVjdHNcTWVnYSBSQVQgMS41IEJldGFcTWVnYS54YW1sIjoDVA4CAQE7BVIQAgECPAdDEgIBEkQHRhICAQ9HB1ESAgEDPQk99gECASE+CT5oAgEfPwk/qAICARpACUBpAgEYQQlBxQECARVCCUJoAgETRQlFcQIBEEgJSGcCAQ1JCUnwAQIBC0oJSmkCAQlLCU8ZAgEHUAlQiAICAQQ9uAE98wECASI+MT47AgEgPzk/PwIBHj8kPygCAR0/az+2AQIBHD/5AT+lAgIBG0AyQDwCARlBVEFeAgEXQaEBQcIBAgEWQjFCOwIBFEU6RUQCARFIMEg6AgEOSa4BSe0BAgEMSjJKPAIBCk1jTa8BAgEIUD1QbAIBBlDOAVCFAgIBBQ==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_1" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Delay_7" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="StartProcess_1" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Delay_1" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="StartProcess_2" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_5" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336,50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_6" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="336,146">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_2" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_3" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Delay_8" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="SendHotkey_1" sap:VirtualizedContainerService.HintSize="314,115">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MoveFile_1" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="336,525">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="358,925">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="380,1049">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Mega_1" sap:VirtualizedContainerService.HintSize="420,1129" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

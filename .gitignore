@@ -1,3 +1,8 @@
 *.pyc
 .idea
 *.zip
+output/*
+apps/a*
+apps/c*
+apps/s*
+rats/*

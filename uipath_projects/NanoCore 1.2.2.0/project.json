@@ -1,0 +1,14 @@
+{
+  "name": "NanoCore 1.2.2.0",
+  "description": "Project",
+  "main": "NanoCore.xaml",
+  "dependencies": {},
+  "excludedData": [
+    "Private:*",
+    "*password*"
+  ],
+  "toolVersion": "18.2",
+  "projectVersion": "1.0.6773.1321",
+  "packOptions": {},
+  "runtimeOptions": {}
+}

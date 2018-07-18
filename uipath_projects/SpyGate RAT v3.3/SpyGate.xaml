@@ -1,0 +1,275 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SpyGate" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="SpyGate_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Core.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="SpyGate" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence DisplayName="Keylogger Sequence" sap2010:WorkflowViewState.IdRef="Sequence_5">
+      <Sequence DisplayName="Warm up" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Update the address map" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_1" ScriptPath="c:\tools\uipath_projects\SpyGate RAT v3.3\update_pid.ps1" />
+        <Delay DisplayName="Delay 5 s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_7" />
+        <ui:StartProcess Arguments="-f" ContinueOnError="True" DisplayName="Start the collector" FileName="c:\tools\apps\apt_collector_release-master\ETWDataCollectorRedesigned.exe" sap2010:WorkflowViewState.IdRef="StartProcess_1" WorkingDirectory="c:\tools\apps\apt_collector_release-master" />
+        <Delay DisplayName="Delay 20 s" Duration="00:00:20" sap2010:WorkflowViewState.IdRef="Delay_1" />
+        <ui:StartProcess Arguments="{x:Null}" DisplayName="Start the RAT" FileName="SpyGate.exe" sap2010:WorkflowViewState.IdRef="StartProcess_2" WorkingDirectory="c:\tools\rats\SpyGate RAT v3.3" />
+        <Delay DisplayName="Delay 5 s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_5" />
+      </Sequence>
+      <Sequence DisplayName="Keylogger 1" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'WindowsForms10.BUTTON.a...'" sap2010:WorkflowViewState.IdRef="Click_7" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="32" OffsetY="12" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="2ab5a4bf13d22be3fb844c828a1f35c4" Selector="&lt;wnd app='spygate.exe' ctrlname='VBInputBox' /&gt;&lt;wnd ctrlname='OKButton' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" DisplayName="Set focus 'SpyGate.exe SpyGate-RAT'" sap2010:WorkflowViewState.IdRef="SetFocus_1">
+          <ui:SetFocus.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="e1f7e4f17cb45daec59297320ff77958" Selector="&lt;wnd app='spygate.exe' ctrlname='FormMain' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SetFocus.Target>
+        </ui:SetFocus>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'list item'" sap2010:WorkflowViewState.IdRef="Click_8" KeyModifiers="None" MouseButton="BTN_RIGHT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="94" OffsetY="10" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="265397ecd8546656b3c7d633fbd59c22" Selector="&lt;wnd app='spygate.exe' ctrlname='FormMain' /&gt;&lt;wnd ctrlname='Panel1' /&gt;&lt;wnd ctrlname='SplitContainer1' /&gt;&lt;wnd ctrlname='L1' /&gt;&lt;ctrl name='HacKed_1668A96A' role='list item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item  Keylogger'" sap2010:WorkflowViewState.IdRef="Click_9" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="93" OffsetY="9" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b2ea1cc452688c8bfc75ded16f41cdc1" Selector="&lt;wnd aaname='DropDown' app='spygate.exe' cls='WindowsForms10.Window.*' idx='1' /&gt;&lt;ctrl name='DropDown' role='popup menu' /&gt;&lt;ctrl name='Keylogger' role='menu item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type into 'SysListView32'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_1" SendWindowMessages="False" SimulateType="False" Text="This is test 1 for keylogger">
+          <ui:TypeInto.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="f21b306973efb224fd714d96aa58f36d" Selector="&lt;wnd app='explorer.exe' cls='Progman' title='Program Manager' /&gt;&lt;wnd cls='SysListView32' title='FolderView' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:TypeInto.Target>
+        </ui:TypeInto>
+        <Delay Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_9" />
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'push button  Refresh'" sap2010:WorkflowViewState.IdRef="Click_10" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="28" OffsetY="9" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="d6cc13764860dedd2781f975a0633185" Selector="&lt;wnd app='spygate.exe' ctrlname='openkl0' /&gt;&lt;wnd ctrlname='ToolStrip1' /&gt;&lt;ctrl name='ToolStrip1' role='tool bar' /&gt;&lt;ctrl name='Refresh' role='push button' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <Delay DisplayName="Delay before close" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_6" />
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'push button  Exit'" sap2010:WorkflowViewState.IdRef="Click_12" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="33" OffsetY="10" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="958236b18a00a10f7d9fe6d03edb2bfe" Selector="&lt;wnd app='spygate.exe' ctrlname='openkl0' /&gt;&lt;wnd ctrlname='ToolStrip1' /&gt;&lt;ctrl name='ToolStrip1' role='tool bar' /&gt;&lt;ctrl name='Exit' role='push button' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+      </Sequence>
+      <Sequence DisplayName="Keylogger 2" sap2010:WorkflowViewState.IdRef="Sequence_7">
+        <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" DisplayName="Set focus 'SpyGate.exe SpyGate-RAT'" sap2010:WorkflowViewState.IdRef="SetFocus_2">
+          <ui:SetFocus.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="e1f7e4f17cb45daec59297320ff77958" Selector="&lt;wnd app='spygate.exe' ctrlname='FormMain' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SetFocus.Target>
+        </ui:SetFocus>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'list item'" sap2010:WorkflowViewState.IdRef="Click_14" KeyModifiers="None" MouseButton="BTN_RIGHT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="94" OffsetY="10" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="265397ecd8546656b3c7d633fbd59c22" Selector="&lt;wnd app='spygate.exe' ctrlname='FormMain' /&gt;&lt;wnd ctrlname='Panel1' /&gt;&lt;wnd ctrlname='SplitContainer1' /&gt;&lt;wnd ctrlname='L1' /&gt;&lt;ctrl name='HacKed_1668A96A' role='list item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item  Keylogger'" sap2010:WorkflowViewState.IdRef="Click_15" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="93" OffsetY="9" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b2ea1cc452688c8bfc75ded16f41cdc1" Selector="&lt;wnd aaname='DropDown' app='spygate.exe' cls='WindowsForms10.Window.*' idx='1' /&gt;&lt;ctrl name='DropDown' role='popup menu' /&gt;&lt;ctrl name='Keylogger' role='menu item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type into 'SysListView32'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="False" SimulateType="False" Text="This is test 2 for keylogger">
+          <ui:TypeInto.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="f21b306973efb224fd714d96aa58f36d" Selector="&lt;wnd app='explorer.exe' cls='Progman' title='Program Manager' /&gt;&lt;wnd cls='SysListView32' title='FolderView' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:TypeInto.Target>
+        </ui:TypeInto>
+        <Delay Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_10" />
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'push button  Refresh'" sap2010:WorkflowViewState.IdRef="Click_16" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="28" OffsetY="9" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="d6cc13764860dedd2781f975a0633185" Selector="&lt;wnd app='spygate.exe' ctrlname='openkl0' /&gt;&lt;wnd ctrlname='ToolStrip1' /&gt;&lt;ctrl name='ToolStrip1' role='tool bar' /&gt;&lt;ctrl name='Refresh' role='push button' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <Delay DisplayName="Delay before close" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_11" />
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'push button  Exit'" sap2010:WorkflowViewState.IdRef="Click_17" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="33" OffsetY="10" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="958236b18a00a10f7d9fe6d03edb2bfe" Selector="&lt;wnd app='spygate.exe' ctrlname='openkl0' /&gt;&lt;wnd ctrlname='ToolStrip1' /&gt;&lt;ctrl name='ToolStrip1' role='tool bar' /&gt;&lt;ctrl name='Exit' role='push button' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+      </Sequence>
+      <Sequence DisplayName="Wrap up" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Delay DisplayName="Delay 5s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_2" />
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Stop the RAT" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_3" ScriptPath="c:\tools\uipath_projects\SpyGate RAT v3.3\kill_processes.ps1" />
+        <Delay DisplayName="Delay 20 s" Duration="00:00:20" sap2010:WorkflowViewState.IdRef="Delay_8" />
+        <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Stop the collector" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="c" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+          <ui:SendHotkey.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;wnd app='etwdatacollectorredesigned.exe' cls='ConsoleWindowClass'/&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SendHotkey.Target>
+        </ui:SendHotkey>
+        <ui:MoveFile ContinueOnError="{x:Null}" Destination="c:\tools\output\SpyGate-v3.3-Keylogger.traces" DisplayName="Save the output" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="True" Path="c:\tools\apps\apt_collector_release-master\output.out" />
+      </Sequence>
+    </Sequence>
+    <sads:DebugSymbol.Symbol>dzZDOlx0b29sc1x1aXBhdGhfcHJvamVjdHNcU3B5R2F0ZSBSQVQgdjMuM1xTcHlHYXRlLnhhbWxXOgO1AQ4CAQE7BbMBEAIBAjwHQxICAUdEB3kSAgEpegenARICAQ+oAQeyARICAQM9CT31AQIBVj4JPmgCAVQ/CT+oAgIBT0AJQGkCAU1BCUHHAQIBSkIJQmgCAUhFCUwUAgFDTQlRFwIBQVIJWRQCAT1aCWEUAgE5YglmFwIBNmcJZ1ACATRoCW8UAgEwcAlwcQIBLnEJeBQCASp7CX8XAgEngAEJhwEUAgEjiAEJjwEUAgEfkAEJlAEXAgEclQEJlQFRAgEalgEJnQEUAgEWngEJngFyAgEUnwEJpgEUAgEQqQEJqQFnAgENqgEJqgHvAQIBC6sBCasBaQIBCawBCbABGQIBB7EBCbEBiAICAQQ9uAE98gECAVc+MT47AgFVPzk/PwIBUz8kPygCAVI/az+2AQIBUT/5AT+lAgIBUEAyQDwCAU5BVEFhAgFMQaQBQcQBAgFLQjFCOwIBSUqcAUr0AQIBRkc1RzkCAUVHKEcsAgFET5wBT9EBAgFCV5wBV+kCAgFAVDVUOQIBP1QoVCwCAT5fnAFf1QICATxcNVw4AgE7XChcLAIBOmScAWSYAgIBOGKjAmLBAgIBN2cZZyMCATVtnAFt0wICATNqNWo4AgEyaihqLAIBMXA6cEQCAS92nAF20AICAS1zNXM5AgEscyhzLAIBK32cAX3RAQIBKIUBnAGFAekCAgEmggE1ggE5AgElggEoggEsAgEkjQGcAY0B1QICASKKATWKATgCASGKASiKASwCASCSAZwBkgGYAgIBHpABowKQAcECAgEdlQEZlQEjAgEbmwGcAZsB0wICARmYATWYATgCARiYASiYASwCAReeATqeAUQCARWkAZwBpAHQAgIBE6EBNaEBOQIBEqEBKKEBLAIBEakBMKkBOgIBDqoBrgGqAewBAgEMqwEyqwE8AgEKrgFjrgGvAQIBCLEBPbEBbAIBBrEBzgGxAYUCAgEF</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_1" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Delay_7" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="StartProcess_1" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Delay_1" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="StartProcess_2" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_5" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="200,50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Click_7" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="SetFocus_1" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_8" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_9" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="TypeInto_1" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="Delay_9" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Click_10" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Delay_6" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Click_12" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="200,50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetFocus_2" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_14" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_15" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="TypeInto_2" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="Delay_10" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Click_16" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Delay_11" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Click_17" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="200,50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_2" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_3" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Delay_8" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="SendHotkey_1" sap:VirtualizedContainerService.HintSize="314,115">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MoveFile_1" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="200,50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="222,444">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="244,568">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SpyGate_1" sap:VirtualizedContainerService.HintSize="284,648" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

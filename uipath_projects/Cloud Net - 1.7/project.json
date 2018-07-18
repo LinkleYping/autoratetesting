@@ -1,0 +1,14 @@
+{
+  "name": "Cloud Net - 1.7",
+  "description": "Project",
+  "main": "CloudNet.xaml",
+  "dependencies": {},
+  "excludedData": [
+    "Private:*",
+    "*password*"
+  ],
+  "toolVersion": "18.2",
+  "projectVersion": "1.0.6773.3548",
+  "packOptions": {},
+  "runtimeOptions": {}
+}

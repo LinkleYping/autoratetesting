@@ -1,0 +1,14 @@
+{
+  "name": "Babylon 1.5.1.0",
+  "description": "Project",
+  "main": "Babylon.xaml",
+  "dependencies": {},
+  "excludedData": [
+    "Private:*",
+    "*password*"
+  ],
+  "toolVersion": "18.2",
+  "projectVersion": "1.0.6773.17696",
+  "packOptions": {},
+  "runtimeOptions": {}
+}

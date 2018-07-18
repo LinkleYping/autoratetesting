@@ -1,0 +1,14 @@
+{
+  "name": "Mega RAT 1.5 Beta",
+  "description": "Project",
+  "main": "Mega.xaml",
+  "dependencies": {},
+  "excludedData": [
+    "Private:*",
+    "*password*"
+  ],
+  "toolVersion": "18.2",
+  "projectVersion": "1.0.6773.1912",
+  "packOptions": {},
+  "runtimeOptions": {}
+}

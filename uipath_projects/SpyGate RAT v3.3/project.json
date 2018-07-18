@@ -1,0 +1,14 @@
+{
+  "name": "SpyGate RAT v3.3",
+  "description": "Project",
+  "main": "SpyGate.xaml",
+  "dependencies": {},
+  "excludedData": [
+    "Private:*",
+    "*password*"
+  ],
+  "toolVersion": "18.2",
+  "projectVersion": "1.0.6773.671",
+  "packOptions": {},
+  "runtimeOptions": {}
+}

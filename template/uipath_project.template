@@ -100,9 +100,9 @@
                 <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message box"
                                sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="change your output file name"
                                TopMost="True"/>
-                <ui:MoveFile ContinueOnError="{x:Null}" Destination="{{ FROM_PATH }}"
+                <ui:MoveFile ContinueOnError="{x:Null}" Destination="{{ DESTINATION_PATH }}"
                              DisplayName="Save the output" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="True"
-                             Path="{{ DESTINATION_PATH }}"/>
+                             Path="{{ FROM_PATH }}"/>
             </Sequence>
         </Sequence>
         <sads:DebugSymbol.Symbol>

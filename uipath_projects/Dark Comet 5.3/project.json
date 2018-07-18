@@ -1,0 +1,14 @@
+{
+  "name": "Dark Comet 5.3",
+  "description": "Project",
+  "main": "DarkComet.xaml",
+  "dependencies": {},
+  "excludedData": [
+    "Private:*",
+    "*password*"
+  ],
+  "toolVersion": "18.2",
+  "projectVersion": "1.0.6773.17014",
+  "packOptions": {},
+  "runtimeOptions": {}
+}
