@@ -1,14 +1,14 @@
 {
-  "name": "sample",
+  "name": "Bozok 1.5.1",
   "description": "Project",
-  "main": "Download&Execution.xaml",
+  "main": "Bozok_main.xaml",
   "dependencies": {},
   "excludedData": [
     "Private:*",
     "*password*"
   ],
   "toolVersion": "18.2",
-  "projectVersion": "1.0.6774.29024",
+  "projectVersion": "1.0.6774.29696",
   "packOptions": {},
   "runtimeOptions": {}
 }

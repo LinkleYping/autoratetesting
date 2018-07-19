@@ -1,5 +1,6 @@
 # start the server
 & '{{ RAT_SERVER_PATH }}'
+Start-Sleep -Seconds 5
 
 # get pid
 # $process_id = (Get-Process -Name server).id # does not work

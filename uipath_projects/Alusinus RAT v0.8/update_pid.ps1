@@ -1,6 +1,5 @@
 # start the server
-& 'c:\tools\rats\sample\server.exe'
-Start-Sleep -Seconds 5
+& 'c:\tools\rats\Alusinus RAT v0.8\server.exe'
 
 # get pid
 # $process_id = (Get-Process -Name server).id # does not work

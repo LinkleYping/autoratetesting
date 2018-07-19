@@ -1,5 +1,5 @@
 # start the server
-& 'c:\tools\rats\sample\server.exe'
+& 'c:\tools\rats\Alusinus RAT v0.9\server.exe'
 Start-Sleep -Seconds 5
 
 # get pid

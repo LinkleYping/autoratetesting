@@ -1,5 +1,5 @@
 # start the server
-& 'c:\tools\rats\sample\server.exe'
+& 'c:\tools\rats\Bozok 1.5.1\server.exe'
 Start-Sleep -Seconds 5
 
 # get pid

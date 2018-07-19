@@ -67,22 +67,43 @@ if __name__ == '__main__':
     kill_processes_path = os.path.join(project_path, 'kill_processes.ps1')
     render_template(os.path.join(ROOT, 'template', 'kill_processes.template'), context, kill_processes_path)
 
-    # generate the project file
+    # generate the warm up file
     collector_path = os.path.join(ROOT, 'apps', COLLECTOR, COLLECTOR_NAME)
     collector_work_directory = os.path.join(ROOT, 'apps', COLLECTOR)
-    rat_path = os.path.join(ROOT, 'rats', rat_name_v, rat_name_exe)
-    from_path = os.path.join(ROOT, 'apps', COLLECTOR, 'output.out')
-    destination_path = os.path.join(ROOT, 'output', rat_name_v + '-phf_name.traces')
+    rat_work_directory = os.path.join(ROOT, 'rats', rat_name_v)
     context = {
-        'PROJECT_NAME': rat_name,
-        'PROJECT_NAME_1': ''.join([rat_name, '_1']),
         'ADDRESS_MAP_UPDATE_PATH': update_pid_path,
         'COLLECTOR_PATH': collector_path,
-        'RAT_PATH': rat_path,
-        'KILL_RAT_PATH': kill_processes_path,
         'COLLECTOR_WORK_DIRECTORY': collector_work_directory, 
+        'RAT_NAME': rat_name_exe, 
+        'RAT_WORK_DIRECTORY': rat_work_directory,
+    }
+    warm_up_path = os.path.join(project_path, 'warm_up.xaml')
+    render_template(os.path.join(ROOT, 'template', 'warm_up.template'), context, warm_up_path)
+
+    # generate the wrap up file
+    from_path = os.path.join(ROOT, 'apps', COLLECTOR, 'output.out')
+    destination_path = os.path.join(ROOT, 'output', rat_name_v)
+    context = {
+        'KILL_RAT_PATH': kill_processes_path,
         'FROM_PATH': from_path, 
         'DESTINATION_PATH': destination_path, 
     }
-    project_xaml_path = os.path.join(project_path, rat_name + '.xaml')
-    render_template(os.path.join(ROOT, 'template', 'uipath_project.template'), context, project_xaml_path)
+    wrap_up_path = os.path.join(project_path, 'wrap_up.xaml')
+    render_template(os.path.join(ROOT, 'template', 'wrap_up.template'), context, wrap_up_path)
+
+    # gegerate phfs file
+    phf_names = {'Keylogger', 'RemoteDesktop', 'RemoteShell', 'RemoteAudio', 'Download_Execution'}
+    for phf_name in phf_names:
+        context = {
+            'PHF_NAME': phf_name, 
+        }
+        phf_path = os.path.join(project_path, phf_name + '.xaml')
+        render_template(os.path.join(ROOT, 'template', 'phf.template'), context, phf_path)
+    
+    # generate the main project file
+    context = {
+        'PROJECT_NAME': rat_name,
+    }
+    project_xaml_path = os.path.join(project_path, rat_name + '_main.xaml')
+    render_template(os.path.join(ROOT, 'template', 'uipath_project_main.template'), context, project_xaml_path)

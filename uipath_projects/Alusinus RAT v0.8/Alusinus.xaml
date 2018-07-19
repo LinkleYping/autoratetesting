@@ -1,0 +1,486 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Alusinus" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="Alusinus_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Core.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Alusinus" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence DisplayName="Keylogger Sequence" sap2010:WorkflowViewState.IdRef="Sequence_5">
+      <Sequence DisplayName="Warm up" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Update the address map" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_1" ScriptPath="c:\tools\uipath_projects\Alusinus RAT v0.8\update_pid.ps1" />
+        <Delay DisplayName="Delay 5 s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_7" />
+        <ui:StartProcess Arguments="-f" ContinueOnError="True" DisplayName="Start the collector" FileName="c:\tools\apps\apt_collector_release-master\ETWDataCollectorRedesigned.exe" sap2010:WorkflowViewState.IdRef="StartProcess_1" WorkingDirectory="c:\tools\apps\apt_collector_release-master" />
+        <Delay DisplayName="Delay 20 s" Duration="00:00:20" sap2010:WorkflowViewState.IdRef="Delay_1" />
+        <ui:StartProcess Arguments="{x:Null}" DisplayName="Start the RAT" FileName="Alusinus.exe" sap2010:WorkflowViewState.IdRef="StartProcess_2" WorkingDirectory="c:\tools\rats\Alusinus RAT v0.8" />
+        <Delay DisplayName="Delay 5 s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_5" />
+      </Sequence>
+      <Sequence DisplayName="Keylogger online 1" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" DisplayName="Set focus 'Alusinus.exe RAT'" sap2010:WorkflowViewState.IdRef="SetFocus_2">
+          <ui:SetFocus.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="1f5066ae7bd7aa2c05ba362f8fb81b30" Selector="&lt;wnd app='alusinus.exe' cls='TForm1' title='RAT Alusinus 0.8' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SetFocus.Target>
+        </ui:SetFocus>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'list item  127.0.0.1'" sap2010:WorkflowViewState.IdRef="Click_9" KeyModifiers="None" MouseButton="BTN_RIGHT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="84" OffsetY="13" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="91dadbebd3aaebb69e4a34bab7d210c7" Selector="&lt;wnd app='alusinus.exe' cls='TForm1' title='RAT Alusinus 0.8' /&gt;&lt;wnd cls='TsListView' /&gt;&lt;ctrl name='127.0.0.1' role='list item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item  23'" sap2010:WorkflowViewState.IdRef="Click_10" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="81" OffsetY="8" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="bb73e5a30e3eb4ffb2bbd6cd78794ee8" Selector="&lt;wnd app='alusinus.exe' cls='#32768' /&gt;&lt;ctrl name='上下文' role='popup menu' /&gt;&lt;ctrl automationid='23' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'TButton'" sap2010:WorkflowViewState.IdRef="Click_11" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="44" OffsetY="11" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="2b84aa343717b87b6750452691c135f4" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TButton' title='Iniciar' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type into 'SysListView32'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="False" SimulateType="False" Text="This is test 1 for keylogger">
+          <ui:TypeInto.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="77db2811afeb489a4d24b68f6db881d3" Selector="&lt;wnd app='explorer.exe' cls='Progman' title='Program Manager' /&gt;&lt;wnd cls='SysListView32' title='FolderView' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:TypeInto.Target>
+        </ui:TypeInto>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'TButton'" sap2010:WorkflowViewState.IdRef="Click_14" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="49" OffsetY="10" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="58abfda06e174273ebaac3c7cf353433" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TButton' title='Detener' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <Delay Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_9" />
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'editable text'" sap2010:WorkflowViewState.IdRef="Click_13" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition Position="Center">
+              <ui:CursorPosition.OffsetX>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetX>
+              <ui:CursorPosition.OffsetY>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetY>
+            </ui:CursorPosition>
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="876dd64307e2c5b1364bbda3bcb20e1d" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TMemo' /&gt;&lt;ctrl role='editable text' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send hotkey 'editable text'" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="end" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+          <ui:SendHotkey.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="876dd64307e2c5b1364bbda3bcb20e1d" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TMemo' /&gt;&lt;ctrl role='editable text' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SendHotkey.Target>
+        </ui:SendHotkey>
+        <Delay DisplayName="Delay before close" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_6" />
+        <ui:CloseWindow TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close window 'Alusinus.exe RAT'" sap2010:WorkflowViewState.IdRef="CloseWindow_1" InformativeScreenshot="bf38316ae3d97a42eb27006436a02043" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;" WaitForReady="INTERACTIVE" />
+      </Sequence>
+      <Sequence DisplayName="Keylogger online 2" sap2010:WorkflowViewState.IdRef="Sequence_10">
+        <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" DisplayName="Set focus 'Alusinus.exe RAT'" sap2010:WorkflowViewState.IdRef="SetFocus_3">
+          <ui:SetFocus.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="1f5066ae7bd7aa2c05ba362f8fb81b30" Selector="&lt;wnd app='alusinus.exe' cls='TForm1' title='RAT Alusinus 0.8' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SetFocus.Target>
+        </ui:SetFocus>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'list item  127.0.0.1'" sap2010:WorkflowViewState.IdRef="Click_15" KeyModifiers="None" MouseButton="BTN_RIGHT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="84" OffsetY="13" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="91dadbebd3aaebb69e4a34bab7d210c7" Selector="&lt;wnd app='alusinus.exe' cls='TForm1' title='RAT Alusinus 0.8' /&gt;&lt;wnd cls='TsListView' /&gt;&lt;ctrl name='127.0.0.1' role='list item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item  23'" sap2010:WorkflowViewState.IdRef="Click_16" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="81" OffsetY="8" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="bb73e5a30e3eb4ffb2bbd6cd78794ee8" Selector="&lt;wnd app='alusinus.exe' cls='#32768' /&gt;&lt;ctrl name='上下文' role='popup menu' /&gt;&lt;ctrl automationid='23' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'TButton'" sap2010:WorkflowViewState.IdRef="Click_17" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="44" OffsetY="11" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="2b84aa343717b87b6750452691c135f4" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TButton' title='Iniciar' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type into 'SysListView32'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_3" SendWindowMessages="False" SimulateType="False" Text="This is test 2 for keylogger">
+          <ui:TypeInto.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="77db2811afeb489a4d24b68f6db881d3" Selector="&lt;wnd app='explorer.exe' cls='Progman' title='Program Manager' /&gt;&lt;wnd cls='SysListView32' title='FolderView' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:TypeInto.Target>
+        </ui:TypeInto>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'TButton'" sap2010:WorkflowViewState.IdRef="Click_18" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="49" OffsetY="10" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="58abfda06e174273ebaac3c7cf353433" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TButton' title='Detener' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <Delay Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_10" />
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'editable text'" sap2010:WorkflowViewState.IdRef="Click_19" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition Position="Center">
+              <ui:CursorPosition.OffsetX>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetX>
+              <ui:CursorPosition.OffsetY>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetY>
+            </ui:CursorPosition>
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="876dd64307e2c5b1364bbda3bcb20e1d" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TMemo' /&gt;&lt;ctrl role='editable text' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send hotkey 'editable text'" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_3" Key="end" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+          <ui:SendHotkey.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="876dd64307e2c5b1364bbda3bcb20e1d" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TMemo' /&gt;&lt;ctrl role='editable text' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SendHotkey.Target>
+        </ui:SendHotkey>
+        <Delay DisplayName="Delay before close" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_11" />
+        <ui:CloseWindow TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close window 'Alusinus.exe RAT'" sap2010:WorkflowViewState.IdRef="CloseWindow_2" InformativeScreenshot="bf38316ae3d97a42eb27006436a02043" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;" WaitForReady="INTERACTIVE" />
+      </Sequence>
+      <Sequence DisplayName="Keylogger offline 1" sap2010:WorkflowViewState.IdRef="Sequence_11">
+        <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" DisplayName="Set focus 'Alusinus.exe RAT'" sap2010:WorkflowViewState.IdRef="SetFocus_4">
+          <ui:SetFocus.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="1f5066ae7bd7aa2c05ba362f8fb81b30" Selector="&lt;wnd app='alusinus.exe' cls='TForm1' title='RAT Alusinus 0.8' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SetFocus.Target>
+        </ui:SetFocus>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'list item  127.0.0.1'" sap2010:WorkflowViewState.IdRef="Click_20" KeyModifiers="None" MouseButton="BTN_RIGHT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="84" OffsetY="13" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="91dadbebd3aaebb69e4a34bab7d210c7" Selector="&lt;wnd app='alusinus.exe' cls='TForm1' title='RAT Alusinus 0.8' /&gt;&lt;wnd cls='TsListView' /&gt;&lt;ctrl name='127.0.0.1' role='list item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item  23'" sap2010:WorkflowViewState.IdRef="Click_21" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="81" OffsetY="8" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="bb73e5a30e3eb4ffb2bbd6cd78794ee8" Selector="&lt;wnd app='alusinus.exe' cls='#32768' /&gt;&lt;ctrl name='上下文' role='popup menu' /&gt;&lt;ctrl automationid='23' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'TButton'" sap2010:WorkflowViewState.IdRef="Click_25" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="41" OffsetY="12" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="8567d101d22a15c4c020ee20685ddfc7" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TButton' title='Borrar Log' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type into 'SysListView32'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_4" SendWindowMessages="False" SimulateType="False" Text="This is test 2 for keylogger">
+          <ui:TypeInto.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="6d5360840a31a90ce48644b2fc22b524" Selector="&lt;wnd app='explorer.exe' cls='Progman' title='Program Manager' /&gt;&lt;wnd cls='SysListView32' title='FolderView' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:TypeInto.Target>
+        </ui:TypeInto>
+        <Delay Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_12" />
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'TButton'" sap2010:WorkflowViewState.IdRef="Click_26" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="28" OffsetY="12" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="032a397c9544925a9d0a1b9241def5d2" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TButton' title='Bajar Log' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'editable text'" sap2010:WorkflowViewState.IdRef="Click_24" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition Position="Center">
+              <ui:CursorPosition.OffsetX>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetX>
+              <ui:CursorPosition.OffsetY>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetY>
+            </ui:CursorPosition>
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="876dd64307e2c5b1364bbda3bcb20e1d" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' omit:title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TMemo' /&gt;&lt;ctrl role='editable text' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send hotkey 'editable text'" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_4" Key="end" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="True">
+          <ui:SendHotkey.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="c2d09283367758ed01e794801dabc08f" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' omit:title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TMemo' /&gt;&lt;ctrl role='editable text' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SendHotkey.Target>
+        </ui:SendHotkey>
+        <Delay DisplayName="Delay before close" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_13" />
+        <ui:CloseWindow TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close window 'Alusinus.exe RAT'" sap2010:WorkflowViewState.IdRef="CloseWindow_3" InformativeScreenshot="bf38316ae3d97a42eb27006436a02043" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;" WaitForReady="INTERACTIVE" />
+      </Sequence>
+      <Sequence DisplayName="Keylogger offline 2" sap2010:WorkflowViewState.IdRef="Sequence_17">
+        <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" DisplayName="Set focus 'Alusinus.exe RAT'" sap2010:WorkflowViewState.IdRef="SetFocus_5">
+          <ui:SetFocus.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="1f5066ae7bd7aa2c05ba362f8fb81b30" Selector="&lt;wnd app='alusinus.exe' cls='TForm1' title='RAT Alusinus 0.8' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SetFocus.Target>
+        </ui:SetFocus>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'list item  127.0.0.1'" sap2010:WorkflowViewState.IdRef="Click_28" KeyModifiers="None" MouseButton="BTN_RIGHT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="84" OffsetY="13" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="91dadbebd3aaebb69e4a34bab7d210c7" Selector="&lt;wnd app='alusinus.exe' cls='TForm1' title='RAT Alusinus 0.8' /&gt;&lt;wnd cls='TsListView' /&gt;&lt;ctrl name='127.0.0.1' role='list item' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item  23'" sap2010:WorkflowViewState.IdRef="Click_29" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="81" OffsetY="8" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="bb73e5a30e3eb4ffb2bbd6cd78794ee8" Selector="&lt;wnd app='alusinus.exe' cls='#32768' /&gt;&lt;ctrl name='上下文' role='popup menu' /&gt;&lt;ctrl automationid='23' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'TButton'" sap2010:WorkflowViewState.IdRef="Click_30" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="41" OffsetY="12" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="8567d101d22a15c4c020ee20685ddfc7" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TButton' title='Borrar Log' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type into 'SysListView32'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_7" SendWindowMessages="False" SimulateType="False" Text="This is test 2 for keylogger">
+          <ui:TypeInto.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="6d5360840a31a90ce48644b2fc22b524" Selector="&lt;wnd app='explorer.exe' cls='Progman' title='Program Manager' /&gt;&lt;wnd cls='SysListView32' title='FolderView' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:TypeInto.Target>
+        </ui:TypeInto>
+        <Delay Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_14" />
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'TButton'" sap2010:WorkflowViewState.IdRef="Click_31" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition OffsetX="28" OffsetY="12" Position="TopLeft" />
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="032a397c9544925a9d0a1b9241def5d2" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TButton' title='Bajar Log' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'editable text'" sap2010:WorkflowViewState.IdRef="Click_32" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition Position="Center">
+              <ui:CursorPosition.OffsetX>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetX>
+              <ui:CursorPosition.OffsetY>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetY>
+            </ui:CursorPosition>
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="876dd64307e2c5b1364bbda3bcb20e1d" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' omit:title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TMemo' /&gt;&lt;ctrl role='editable text' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send hotkey 'editable text'" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_5" Key="end" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="True">
+          <ui:SendHotkey.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="c2d09283367758ed01e794801dabc08f" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' omit:title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;&lt;wnd cls='TMemo' /&gt;&lt;ctrl role='editable text' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SendHotkey.Target>
+        </ui:SendHotkey>
+        <Delay DisplayName="Delay before close" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_15" />
+        <ui:CloseWindow TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close window 'Alusinus.exe RAT'" sap2010:WorkflowViewState.IdRef="CloseWindow_4" InformativeScreenshot="bf38316ae3d97a42eb27006436a02043" Selector="&lt;wnd app='alusinus.exe' cls='TForm11' title='RAT Alusinus 0.8 Keylogger -&amp;gt; LUCCI-PC' /&gt;" WaitForReady="INTERACTIVE" />
+      </Sequence>
+      <Sequence DisplayName="Wrap up" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Delay DisplayName="Delay 5s" Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_2" />
+        <ui:RunPowerShellScript x:TypeArguments="x:Object" Output="{x:Null}" DisplayName="Stop the RAT" sap2010:WorkflowViewState.IdRef="RunPowerShellScript`1_3" ScriptPath="c:\tools\uipath_projects\Alusinus RAT v0.8\kill_processes.ps1" />
+        <Delay DisplayName="Delay 20 s" Duration="00:00:20" sap2010:WorkflowViewState.IdRef="Delay_8" />
+        <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Stop the collector" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="c" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+          <ui:SendHotkey.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;wnd app='etwdatacollectorredesigned.exe' cls='ConsoleWindowClass'/&gt;" WaitForReady="INTERACTIVE" />
+          </ui:SendHotkey.Target>
+        </ui:SendHotkey>
+        <ui:MoveFile ContinueOnError="{x:Null}" Destination="[String.Join(&quot;-&quot;, &quot;c:\tools\output\Alusinus-v0.8-Keylogger.traces&quot;, DateTime.Now.Tostring(&quot;yyyy-MM-dd-HH-mm-ss&quot;))]" DisplayName="Save the output" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="True" Path="c:\tools\apps\apt_collector_release-master\output.out" />
+      </Sequence>
+    </Sequence>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_1" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Delay_7" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="StartProcess_1" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Delay_1" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="StartProcess_2" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_5" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336,50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetFocus_2" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_9" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_10" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_11" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="TypeInto_2" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="Click_14" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Delay_9" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Click_13" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="SendHotkey_2" sap:VirtualizedContainerService.HintSize="314,153" />
+      <sap2010:ViewStateData Id="Delay_6" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="CloseWindow_1" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="336,50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetFocus_3" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_15" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_16" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_17" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="TypeInto_3" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="Click_18" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Delay_10" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Click_19" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="SendHotkey_3" sap:VirtualizedContainerService.HintSize="314,153" />
+      <sap2010:ViewStateData Id="Delay_11" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="CloseWindow_2" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="336,50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetFocus_4" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_20" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_21" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_25" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="TypeInto_4" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="Delay_12" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Click_26" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_24" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="SendHotkey_4" sap:VirtualizedContainerService.HintSize="314,153" />
+      <sap2010:ViewStateData Id="Delay_13" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="CloseWindow_3" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="336,50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetFocus_5" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_28" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_29" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_30" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="TypeInto_7" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="Delay_14" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Click_31" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_32" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="SendHotkey_5" sap:VirtualizedContainerService.HintSize="314,153" />
+      <sap2010:ViewStateData Id="Delay_15" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="CloseWindow_4" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Sequence_17" sap:VirtualizedContainerService.HintSize="336,50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_2" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="RunPowerShellScript`1_3" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Delay_8" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="SendHotkey_1" sap:VirtualizedContainerService.HintSize="314,115">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MoveFile_1" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="336,525">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="358,1099">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="380,1223">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Alusinus_1" sap:VirtualizedContainerService.HintSize="420,1303" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
