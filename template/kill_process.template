@@ -1,0 +1,4 @@
+#end
+taskkill /im server.exe /f
+taskkill /im "{{ RAT_NAME }}" /f
+taskkill /im ETWDataCollectorRedesigned.exe /f

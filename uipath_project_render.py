@@ -9,6 +9,8 @@ And then, open the project with UiPath and record PHFs.
 """
 import os
 import sys
+import threading
+import time
 
 from configuration import ROOT, COLLECTOR, COLLECTOR_NAME, LINE_NUMBER
 from render import Render
@@ -39,9 +41,27 @@ def render_template(template, context, target):
         f.flush()
         f.close()
 
+def run(psname):
+    os.chdir(project_path)
+    os.system("powershell .\\" + psname)
+
 
 if __name__ == '__main__':
-    rat_path = sys.argv[-1]
+    flagc = 0
+    flagd = 0
+    if len(sys.argv) == 2:
+        rat_path = sys.argv[-1]
+    elif len(sys.argv) == 3 and sys.argv[-1] == '-c':
+        rat_path = sys.argv[1]
+        flagc = 1  # not use collector
+    elif len(sys.argv) == 3 and sys.argv[-1] == '-d':
+        rat_path = sys.argv[1]
+        flagd = 1  # save the trace dependently
+    else:
+        print """=======Usage:=======\npython uipath_project_render.py [RAT_PATH] [-c] [-d]\n-c:if you don't want to use the collector\n-d:save the trace dependently\n==============="""
+        print "please follow the usage"
+        sys.exit(0)
+    
     rat_name_exe = os.path.basename(rat_path)
     rat_name_v = rat_path.split('\\')[-2] # rat name with version
     rat_name = rat_name_exe[:-4]
@@ -51,7 +71,7 @@ if __name__ == '__main__':
     if not os.path.exists(project_path):
         os.mkdir(project_path)
 
-    # generate a PowerShell script to update the PID
+    # generate a PowerShell script to start the server
     rat_server_path = os.path.join(ROOT, 'rats', rat_name_v, 'server.exe')
     configuration_path = os.path.join(ROOT, 'apps', COLLECTOR, 'user_configuration.txt')
     context = {
@@ -59,51 +79,85 @@ if __name__ == '__main__':
         'CONFIGURATION_PATH': configuration_path,
         'LINE_NUMBER': LINE_NUMBER,
     }
-    update_pid_path = os.path.join(project_path, 'update_pid.ps1')
-    render_template(os.path.join(ROOT, 'template', 'update_pid.template'), context, update_pid_path)
-
-    # generate a PowerShell script to kill the processes
-    context = {'RAT_NAME': rat_name_exe}
-    kill_processes_path = os.path.join(project_path, 'kill_processes.ps1')
-    render_template(os.path.join(ROOT, 'template', 'kill_processes.template'), context, kill_processes_path)
-
-    # generate the warm up file
-    collector_path = os.path.join(ROOT, 'apps', COLLECTOR, COLLECTOR_NAME)
-    collector_work_directory = os.path.join(ROOT, 'apps', COLLECTOR)
-    rat_work_directory = os.path.join(ROOT, 'rats', rat_name_v)
-    context = {
-        'ADDRESS_MAP_UPDATE_PATH': update_pid_path,
-        'COLLECTOR_PATH': collector_path,
-        'COLLECTOR_WORK_DIRECTORY': collector_work_directory, 
-        'RAT_NAME': rat_name_exe, 
-        'RAT_WORK_DIRECTORY': rat_work_directory,
-    }
-    warm_up_path = os.path.join(project_path, 'warm_up.xaml')
-    render_template(os.path.join(ROOT, 'template', 'warm_up.template'), context, warm_up_path)
-
-    # generate the wrap up file
-    from_path = os.path.join(ROOT, 'apps', COLLECTOR, 'output.out')
-    destination_path = os.path.join(ROOT, 'output', rat_name_v)
-    context = {
-        'KILL_RAT_PATH': kill_processes_path,
-        'FROM_PATH': from_path, 
-        'DESTINATION_PATH': destination_path, 
-    }
-    wrap_up_path = os.path.join(project_path, 'wrap_up.xaml')
-    render_template(os.path.join(ROOT, 'template', 'wrap_up.template'), context, wrap_up_path)
-
-    # gegerate phfs file
-    phf_names = {'Keylogger', 'RemoteDesktop', 'RemoteShell', 'RemoteAudio', 'Download_Execution'}
-    for phf_name in phf_names:
-        context = {
-            'PHF_NAME': phf_name, 
-        }
-        phf_path = os.path.join(project_path, phf_name + '.xaml')
-        render_template(os.path.join(ROOT, 'template', 'phf.template'), context, phf_path)
+    start_server = os.path.join(project_path, 'start_server.ps1')
+    render_template(os.path.join(ROOT, 'template', 'start_server.template'), context, start_server)
+    os.chdir(project_path)
+    os.system("powershell .\\start_server.ps1")
+    print "server start"
     
-    # generate the main project file
+    # use collector
+    thread_collector = threading.Thread(target=run, args={"start_collector.ps1"})
+    if flagc == 0:
+        # generate a PowerShell script to start the collector
+        context = {}
+        start_collector = os.path.join(project_path, 'start_collector.ps1')
+        render_template(os.path.join(ROOT, 'template', 'start_collector.template'), context, start_collector)
+        thread_collector.start()
+        print "collector start"
+    time.sleep(20)
+    # generate a PowerShell script to start the client
+    rat_version_path = os.path.join(ROOT, 'rats', rat_name_v)
     context = {
-        'PROJECT_NAME': rat_name,
+        'RAT_VERSION': rat_version_path,
+        'RAT_CLIENT_PATH': rat_path
     }
-    project_xaml_path = os.path.join(project_path, rat_name + '_main.xaml')
-    render_template(os.path.join(ROOT, 'template', 'uipath_project_main.template'), context, project_xaml_path)
+    start_client = os.path.join(project_path, 'start_client.ps1')
+    render_template(os.path.join(ROOT, 'template', 'start_client.template'), context, start_client)
+    thread_client = threading.Thread(target=run, args={"start_client.ps1"})
+    thread_client.start()
+    print "client start"
+    time.sleep(10)
+
+    if flagc == 0:
+        if flagd == 0: # not dependently
+            project_xaml_path = os.path.join(project_path, 'Main.xaml')
+            xaml_name = 'Main'
+            xaml_exe = os.path.join(project_path, 'Main.ps1')
+            context = {
+                'RAT_UIPATH': project_path,
+                'RAT_UIPATH_XAML': project_xaml_path,
+                'RAT_NAME': rat_name_v,
+                'XAML_NAME': xaml_name
+            }
+            render_template(os.path.join(ROOT, 'template', 'xaml_execute.template'), context, xaml_exe)
+            os.chdir(project_path)
+            os.system("powershell .\\" + xaml_name + ".ps1")
+
+        elif flagd == 1: # save dependently
+            phf_names = {'Keylogger', 'RemoteDesktop', 'RemoteShell', 'RemoteAudio', 'Download_Execution'}
+            for phf_name in phf_names:
+                project_xaml_path = os.path.join(project_path, phf_name + '.xaml')
+                xaml_exe = os.path.join(project_path, phf_name + '.ps1')
+                context = {
+                    'RAT_UIPATH': project_path,
+                    'RAT_UIPATH_XAML': project_xaml_path,
+                    'RAT_NAME': rat_name_v,
+                    'XAML_NAME': phf_name
+                }
+                render_template(os.path.join(ROOT, 'template', 'xaml_execute.template'), context, xaml_exe)
+                os.chdir(project_path)
+                os.system("powershell .\\" + phf_name + ".ps1")
+    elif flagc == 1:
+        project_xaml_path = os.path.join(project_path, 'Main.xaml')
+        xaml_name = 'Main'
+        xaml_exe = os.path.join(project_path, 'Main.ps1')
+        context = {
+            'RAT_UIPATH': project_path,
+            'RAT_UIPATH_XAML': project_xaml_path
+        }
+        render_template(os.path.join(ROOT, 'template', 'start_xaml.template'), context, xaml_exe)
+        os.chdir(project_path)
+        os.system("powershell .\\" + xaml_name + ".ps1")
+    print "uipath finished"
+
+    # generate a PowerShell script to kill the process
+    context = {
+        'RAT_NAME': rat_name_exe
+    }
+    kill_process = os.path.join(project_path, 'kill_process.ps1')
+    render_template(os.path.join(ROOT, 'template', 'kill_process.template'), context, kill_process)
+    os.chdir(project_path)
+    os.system("powershell .\\kill_process.ps1")
+
+    print "exit successfully"
+    sys.exit(0)

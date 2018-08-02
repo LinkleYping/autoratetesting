@@ -1,0 +1,30 @@
+#update pid
+
+# start the server
+& '{{ RAT_SERVER_PATH }}'
+Start-Sleep -Seconds 5
+
+# get pid
+# $process_id = (Get-Process -Name server).id # does not work
+$process_id = (Get-Process server | sort CPU | select -last 1).id # this one works
+# cmd /c pause | out-null # debug
+
+# update
+$configuration = Get-Content -path "{{ CONFIGURATION_PATH }}"
+$configuration[{{ LINE_NUMBER }}] = "output_whitelist_processid $process_id"
+$configuration | Set-Content -path "{{ CONFIGURATION_PATH }}"
+
+#start client and auto test
+#cd "C:\tools\apps\apt_collector_release-master"
+#c:\tools\apps\apt_collector_release-master\ETWDataCollectorRedesigned.exe -f
+#sleep 20
+cd "{{ RAT_VERSION }}"
+& '{{ RAT_CLIENT_PATH }}'
+cd "{{ RAT_UIPATH }}"
+C:\Users\Debugger\AppData\Local\UiPath\app-18.2.3\UiRobot.exe -f "{{ RAT_UIPATH_MAIN }}"
+
+#end
+taskkill /im server.exe /f
+taskkill /im "{{ RAT_NAME }}" /f
+#$date = Get-Date -Format 'yyyyMMddHHmmss'
+#copy C:\tools\apps\apt_collector_release-master\output.out -destination c:\tools\output\SpyGate-RAT-v3.3-$date.out

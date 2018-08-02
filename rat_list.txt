@@ -1,0 +1,15 @@
+C:\tools\rats\Alusinus RAT v0.8\Alusinus.exe
+C:\tools\rats\Alusinus RAT v0.9\Alusinus.exe
+C:\tools\rats\Babylon 1.6.0.0\Babylon RAT.exe
+C:\tools\rats\Coringa-RAT 0.1\Coringa-RAT 0.1.exe
+C:\tools\rats\Dark Comet 4.0\DarkComet.exe
+C:\tools\rats\Dark Comet 5.1\DarkComet.exe
+C:\tools\rats\Dark Comet 5.3\DarkComet.exe
+C:\tools\rats\DarkCometRAT52-2F\DarkComet.exe
+C:\tools\rats\DarkCometRAT53\DarkComet.exe
+C:\tools\rats\DarkCometRAT531\DarkComet.exe
+C:\tools\rats\L6-Rat Beta 1\L6-Rat Beta 1.exe
+C:\tools\rats\Mega RAT 1.5 Beta\Mega RAT 1.5 Beta.exe
+C:\tools\rats\NanoCore 1.2.2.0\NanoCore.exe
+
+

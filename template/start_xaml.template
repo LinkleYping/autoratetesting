@@ -1,0 +1,2 @@
+cd "{{ RAT_UIPATH }}"
+C:\Users\rat_auto_testing\AppData\Local\UiPath\app-18.2.3\UiRobot.exe -f "{{ RAT_UIPATH_XAML }}"

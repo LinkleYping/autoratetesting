@@ -1,0 +1,4 @@
+cd "{{ RAT_UIPATH }}"
+C:\Users\rat_auto_testing\AppData\Local\UiPath\app-18.2.3\UiRobot.exe -f "{{ RAT_UIPATH_XAML }}"
+$date = Get-Date -Format 'yyyyMMddHHmmss'
+copy C:\tools\apps\apt_collector_release-master\output.out -destination "c:\tools\output\{{ RAT_NAME }}{{ XAML_NAME }}-$date.out"

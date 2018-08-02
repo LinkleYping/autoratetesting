@@ -1,0 +1,3 @@
+#start client and auto test
+cd "C:\tools\apps\apt_collector_release-master"
+c:\tools\apps\apt_collector_release-master\ETWDataCollectorRedesigned.exe -f

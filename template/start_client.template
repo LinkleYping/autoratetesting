@@ -1,0 +1,2 @@
+cd "{{ RAT_VERSION }}"
+& "{{ RAT_CLIENT_PATH }}"
